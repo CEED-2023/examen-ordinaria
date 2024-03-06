@@ -1,7 +1,3 @@
-* {
-  /* border: 1px solid red; */
-}
-
 body {
   font-family:
     "Segoe UI", "Roboto", "Helvetica Neue",
@@ -77,4 +73,16 @@ body {
 .wrong {
   border: 5px solid red;
   background-color: red;
+}
+
+.next {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 10px;
+  width: 300px;
+  font-size: 1.5rem;
+  height: 3rem;
+  padding: 0.5rem;
 }

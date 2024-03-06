@@ -6,20 +6,31 @@
       "node": true
   },
   "extends": [
-    "eslint:recommended"
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+    "plugin:react-hooks/recommended"
   ],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
+  "settings": {
+    "react": { "version": "18.2" }
+  },
   "ignorePatterns": ["dist", ".eslintrc.cjs"],
   "noInlineConfig": true,
   "reportUnusedDisableDirectives": true,
+  "plugins": ["react-refresh"],
 
   // You can check the rules here: https://eslint.org/docs/rules/
   // If eslint is complaining about a rule not enumerated here, you can ignore it.
   "rules": {
-      "complexity": ["error", { "max": 5 }],
+      "react-refresh/only-export-components": [
+        "warn",
+        { "allowConstantExport": true }
+      ],
+      "complexity": ["error", { "max": 6 }],
       "react/prop-types": "off",
       "array-callback-return": "error",
       "constructor-super": "error",
@@ -71,7 +82,10 @@
       "no-unsafe-negation": "error",
       "no-unsafe-optional-chaining": "error",
       "no-unused-private-class-members": "error",
-      "no-unused-vars": "error",
+      "no-unused-vars": [
+        "error",
+        { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }
+      ],
       "no-use-before-define": "error",
       "no-useless-backreference": "error",
       "require-atomic-updates": "error",

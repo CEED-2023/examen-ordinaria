@@ -11,13 +11,41 @@ function revealImage() {
   document.getElementById("image").classList.remove('black')
 }
 
+function revealHandler(event) {
+  reveal(event.target.textContent)
+}
+
+function addButtonHandlers(){
+  for(let i=0; i<4; i++) {
+    const button = document.getElementById(`answer-${i+1}`)
+    button.addEventListener("click",revealHandler)
+  }
+}
+
+function removeButtonHandlers(){
+  for(let i=0; i<4; i++) {
+    const button = document.getElementById(`answer-${i+1}`)
+    button.removeEventListener("click",revealHandler)
+  }
+}
+
+function enableNextButton(){
+  const nextButton = document.querySelector(".next")
+  nextButton.disabled = false
+}
+
+function disableNextButton(){
+  const nextButton = document.querySelector(".next")
+  nextButton.disabled = true
+}
+
 function addLoading() {
   const loading = document.createElement("div")
   loading.classList.add("loading")
   loading.innerHTML = `
     <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
   `
-  document.body.appendChild(loading)
+  document.getElementById("root").appendChild(loading)
 }
 
 function removeLoading() {
@@ -92,13 +120,9 @@ async function newQuestion() {
   await setPokemonImage(selected.sprite)
   setButtonCaptions(pokemons.map(pokemon => pokemon.nombre))
   removeLoading()
+  addButtonHandlers()
+  disableNextButton()
   return selected
-}
-
-function wait(seconds) {
-  return new Promise(resolve => {
-      setTimeout(resolve, seconds * 1000)
-  })
 }
 
 function increaseScore() {
@@ -126,6 +150,7 @@ function markCorrectAnswer(name) {
 
 async function reveal(name) {
   const correct = selected.nombre === name
+  removeButtonHandlers()
   revealImage()
   if(correct){
     increaseScore()
@@ -133,15 +158,17 @@ async function reveal(name) {
     markWrongAnswer(name)
   }
   markCorrectAnswer(selected.nombre)
-  await wait(3)
-  selected = await newQuestion()
+  enableNextButton()
 }
 
 function installHandlers(){
-  for(let i=0; i<4; i++) {
-    const button = document.getElementById(`answer-${i+1}`)
-    button.addEventListener("click", () => reveal(button.textContent))
-  }
+  addButtonHandlers()
+
+  const nextButton = document.querySelector(".next")
+  nextButton.addEventListener("click", async () => {
+    selected = await newQuestion()
+    console.log(selected)
+  })
 }
 
 installHandlers()
