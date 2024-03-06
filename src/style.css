@@ -1,0 +1,80 @@
+* {
+  /* border: 1px solid red; */
+}
+
+body {
+  font-family:
+    "Segoe UI", "Roboto", "Helvetica Neue",
+    "Noto Sans", "Liberation Sans", "Arial", "sans-serif",
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: #f5f5f5;
+  box-shadow: 0 0 10px black;
+}
+
+#score {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+#image {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 1rem;
+}
+
+#answers {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  width: 100%;
+}
+
+.answer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#answers button {
+  margin: 10px;
+  width: 300px;
+  font-size: 1.5rem;
+  height: 3rem;
+  padding: 0.5rem;
+}
+
+#image {
+  height: 300px;
+}
+
+#image img {
+  height: 100%;
+  max-width: 400px;
+  margin-bottom: 1rem;
+}
+
+.black {
+  filter: brightness(0%);
+}
+
+.correct {
+  border: 5px solid green;
+  filter: drop-shadow(2px 4px 6px black);
+}
+
+.wrong {
+  border: 5px solid red;
+  background-color: red;
+}
